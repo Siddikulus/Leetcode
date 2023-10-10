@@ -26,15 +26,17 @@ Constraints:
 
 class Solution:
     def containsNearbyDuplicate(self, nums: list[int], k: int) -> bool:
-        slow = 0
-        while slow<len(nums):
-            for fast in range(1,len(nums)):
-                if slow!=fast and nums[slow] == nums[fast] and (abs(fast-slow) <= k):
-                    print(nums[slow], nums[fast])
-                    print(slow,fast)
-                    return True
-            slow+=1
+        if len(nums) == len(set(nums)):
+            return False
+
+        no_dupes = []
+        for i in range(len(nums)):
+            if nums[i] not in no_dupes:
+                no_dupes.append(nums[i])
+            else:
+                 if abs(no_dupes.index(nums[i]) - i) <= k:
+                     return True
         return False
 
 s = Solution()
-print(s.containsNearbyDuplicate([1,2,3,1,2,3], 2))
+print(s.containsNearbyDuplicate([1,2,3,1], 3))

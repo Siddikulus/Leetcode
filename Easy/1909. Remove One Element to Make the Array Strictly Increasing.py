@@ -38,28 +38,16 @@ Constraints:
 
 class Solution:
     def canBeIncreasing(self, nums: list[int]) -> bool:
-        count = 0
-        ans = []
-        for i in range(len(nums)-1):
-            if nums[i+1] - nums[i] <= 0:
-                count += 1
+        isRemove = False
+        for i in range(1, len(nums)):
+            if nums[i] <= nums[i-1]:
+                if isRemove: return False
+                if i > 1 and nums[i] <= nums[i-2]:
+                    nums[i] = nums[i-1]
+                else:
+                    nums[i-1] = nums[i]
+                isRemove = True
 
-        # print(count)
-        if count >= 2:
-            return False
-        elif count == 1:
-            for i in range(len(nums) - 1):
-                if nums[i+1] >= nums[i]:
-                    ans.append(nums[i])
-            ans.append(nums[-1])
-            # print(ans)
-            count = 0
-            for i in range(len(ans) - 1):
-                if ans[i + 1] - ans[i] <= 0:
-                    count += 1
-            # print(count)
-            if count >= 1:
-                return False
         return True
 
 
