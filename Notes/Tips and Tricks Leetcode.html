@@ -57,6 +57,44 @@
         For example: To check if count of characters is same in string and substrings. Use dict and check if string and substring dicts are same
 
     </li>
+    <li>
+        <h4>Comparing integer as strings works the same as comparing integers!</h4>
+        For example: 4 < 5 is the same as str(4) < str(5)
+    </li>
+    <li>
+        <h4>Add your own custom sorting function!</h4>
+        To add your own custom sorting function:<br>
+        #first import functools (only for python 3)<br>
+        from functools import cmp_to_key<br>
+        #Create your own sorting function which returns 0, 1, or -1 (1/-1 will be assigned based on ascending/descending) <br>
+        def comparison(x, y):<br>
+            if x + y > y + x:<br>
+                return -1<br>
+            else:<br>
+                return 1<br>
+        #Call the custom sorting function<br>
+        sorted(nums, key = cmp_to_key(comparison))<br>
+    </li>
+    <li>
+        <h4>Get all unique subarrays (contiguous subsequences) from array using Sliding Window</h4>
+        res = set()
+        N = len(nums)
+
+        for i in range(N):
+            for j in range(i, N):
+                res.add(tuple(nums[i:j + 1]))
+
+        return len(res)
+    </li>
+    <li>
+        <h4>Find Time complexity of any code online!!</h4>
+        <ul>
+            <a href="https://www.bigocalc.com/">Big O Calc</a>
+        </ul>
+        <ul>
+            <a href="https://www.timecomplexity.ai/">Time Complexity through AI</a>
+        </ul>
+    </li>
 
 </ul>
 </body>
