@@ -1,0 +1,47 @@
+'''
+Given a string s, reverse only all the vowels in the string and return it.
+
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+
+
+
+Example 1:
+
+Input: s = "hello"
+Output: "holle"
+Example 2:
+
+Input: s = "leetcode"
+Output: "leotcede"
+
+
+Constraints:
+
+1 <= s.length <= 3 * 105
+s consist of printable ASCII characters.
+'''
+
+
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        vowels = 'aeiouAEIOU'
+        chars = []
+        vows = []
+        for element in s:
+            if element in vowels:
+                vows.append(element)
+            else:
+                chars.append(element)
+        vows.reverse()
+
+        final = []
+        # print(chars, vows, s)
+        for i in range(len(s)):
+            if s[i] in vowels:
+                final.append(vows[0])
+                vows.pop(0)
+            else:
+                final.append(s[i])
+        return ''.join(final)
+
+print(Solution().reverseVowels('aA'))

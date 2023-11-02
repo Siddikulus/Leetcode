@@ -29,14 +29,14 @@ class Solution:
         if len(nums) == len(set(nums)):
             return False
 
-        no_dupes = []
+        indexDict = {}
         for i in range(len(nums)):
-            if nums[i] not in no_dupes:
-                no_dupes.append(nums[i])
-            else:
-                 if abs(no_dupes.index(nums[i]) - i) <= k:
-                     return True
+            if nums[i] in indexDict:
+                if i - indexDict[nums[i]] <= k:
+                    return True
+            indexDict[nums[i]] = i
+            # print(indexDict, i, nums[i])
         return False
 
 s = Solution()
-print(s.containsNearbyDuplicate([1,2,3,1], 3))
+print(s.containsNearbyDuplicate([1,0,1,1], 1))

@@ -37,26 +37,17 @@ class Solution:
 
         i,j = 0,1
         count = 0
-        prefix_sum = [people[0]]
 
-        # for k in range(1, len(people)):
-        #     prefix_sum.append(prefix_sum[k-1] + people[k])
-
-        print(i, j, prefix_sum, count)
-        while i < j and j<len(people):
-            prefix_sum.insert(j, people[j] + prefix_sum[i])
-            if prefix_sum[i] <= limit and prefix_sum[j] > limit:
-                count +=1
-                prefix_sum[j] = prefix_sum[j] - people[i]
+        while j < len(people):
+            if people[i] + people[j] <= limit:
+                count += 1
                 i += 1
                 j += 1
-            elif prefix_sum[i] <= limit and prefix_sum[j] > limit:
-                i+=1
-                j+=1
-            else:
-                i+=1
-                j+=1
-            print(i,j,prefix_sum, count)
+            elif people[i] <= limit:
+                count += 1
+                i +=1
+                j +=1
+            print(i,j,count)
         return count
 
 print(Solution().numRescueBoats([3,5,3,4], 5))
