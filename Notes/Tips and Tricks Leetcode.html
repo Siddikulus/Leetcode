@@ -76,15 +76,10 @@
         sorted(nums, key = cmp_to_key(comparison))<br>
     </li>
     <li>
-        <h4>Get all unique subarrays (contiguous subsequences) from array using Sliding Window</h4>
-        res = set()
-        N = len(nums)
-
-        for i in range(N):
-            for j in range(i, N):
-                res.add(tuple(nums[i:j + 1]))
-
-        return len(res)
+        <h4>Get Templates of Coding Patterns!!! (Very important/Good Source)</h4>
+        <ul>
+            <a href="https://algo.monster/templates">Algo Monster Templates</a>
+        </ul>
     </li>
     <li>
         <h4>Find Time complexity of any code online!!</h4>
@@ -96,6 +91,32 @@
         </ul>
     </li>
 
+    <li>
+        <h4>Fixed Sliding Window Solution Template</h4>
+        <img src="Images/sliding_window_fixed.png" alt="Sliding Window Fixed" height = "300" width = "1000">
+    </li>
+        <li>
+        <h4>Variable Sliding Window (Maximum/Longest) Solution Template</h4>
+        <img src="Images/sliding_window_max_variable.png" alt="Sliding Window Variable (Maximum)" height = "300" width = "1000">
+    </li>
+        <li>
+        <h4>Variable Sliding Window (Minimum/Shortest) Solution Template</h4>
+        <img src="Images/sliding_window_min_variable.png" alt="Sliding Window Variable (Minimum)" height = "300" width = "1000">
+    </li>
+    <li>
+        <h4>Binary Search</h4> <a href="https://www.youtube.com/watch?v=tgVSkMA8joQ&t=417s">Quick Review of Binary Search</a>
+        <p>If you're trying to find the location of first occurence in array, use '<' <b>(bisect left)</b> in condition, else '<=' <b>(bisect right)</b></p>
+
+        <p><u>General Template</u></p>
+        <img src="Images/binary_search_template.png" alt="Binary Search - Template" height = "300" width = "1000">
+
+
+        <p><u>Binary Search - Lower Bound (Bisect left):</u> Smallest index such that <b>arr[index] >= target</b></p>
+        <img src="Images/binary_search_lower_bound.png" alt="Binary Search - Lower Bound" height = "300" width = "300">
+
+        <p><u>Binary Search - Upper Bound (Bisect right):</u> Smallest index such that <b>arr[index] > target</b></p>
+        <img src="Images/binary_search_upper_bound.png" alt="Binary Search - Upper Bound" height = "300" width = "300">
+    </li>
 </ul>
 </body>
 </html>

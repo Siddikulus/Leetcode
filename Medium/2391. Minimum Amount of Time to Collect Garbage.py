@@ -55,70 +55,22 @@ travel.length == garbage.length - 1
 
 class Solution:
     def garbageCollection(self, garbage: list[str], travel: list[int]) -> int:
+        res = 0
 
-        #Travel time sum for each house
-        totaltime = 0
-        for i in range(len(travel)):
-            totaltime = totaltime + travel[i]
-            travel[i] = totaltime
+        for g in garbage:
+            res += len(g)
+        print(res)
+        m, p, g = False, False, False
+
+        for i in range(len(travel), 0, -1):
+            m = m or 'M' in garbage[i]
+            p = p or 'P' in garbage[i]
+            g = g or 'G' in garbage[i]
+
+            res += travel[i - 1] * (m + p + g)
+            print(m,p,g,res, travel[i-1])
+        return res
 
 
-        #Creating count dictionary for metals
-        dictTruck = {}
-        for i in range(len(garbage)):
-            if 'M' in garbage[i]:
-                dictTruck[garbage[i]] = garbage[i].count('M')
 
-        #Metal Truck
-        metalT = 0
-        lastindexM = -1
-        for i in range(len(garbage)):
-            if 'M' in garbage[i]:
-                metalT += dictTruck[garbage[i]]
-                lastindexM = i
-
-        if lastindexM != -1:
-            metalT += travel[lastindexM-1]
-        # print(metalT)
-
-        # Creating count dictionary for paper
-        dictTruck = {}
-        for i in range(len(garbage)):
-            if 'P' in garbage[i]:
-                dictTruck[garbage[i]] = garbage[i].count('P')
-
-        #Paper Truck
-        paperT = 0
-        lastindexM = -1
-        for i in range(len(garbage)):
-            # print(garbage[i])
-            if 'P' in garbage[i]:
-                paperT += dictTruck[garbage[i]]
-                lastindexM = i
-
-        if lastindexM != -1:
-            paperT += travel[lastindexM-1]
-        # print(paperT)
-
-        # Creating count dictionary for paper
-        dictTruck = {}
-        for i in range(len(garbage)):
-            if 'G' in garbage[i]:
-                dictTruck[garbage[i]] = garbage[i].count('G')
-
-        #Garbage Truck
-        garbageT = 0
-        lastindexM = -1
-        for i in range(len(garbage)):
-            # print(garbage[i])
-            if 'G' in garbage[i]:
-                garbageT +=  dictTruck[garbage[i]]
-                lastindexM = i
-
-        if lastindexM != -1:
-            garbageT += travel[lastindexM-1]
-        print(metalT, paperT, garbageT)
-
-        return metalT + paperT + garbageT
-
-print(Solution().garbageCollection(["G","M"], [1]))
+print(Solution().garbageCollection(["GMGMPGMPP","MPPGMPGPMM","G"], [3,2]))

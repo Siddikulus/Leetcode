@@ -1,27 +1,49 @@
 '''
-Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+We are given an array asteroids of integers representing asteroids in a row.
+
+For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.
+
+Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
 
 
 
 Example 1:
 
-Input: n = 3
-Output: ["((()))","(()())","(())()","()(())","()()()"]
+Input: asteroids = [5,10,-5]
+Output: [5,10]
+Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.
 Example 2:
 
-Input: n = 1
-Output: ["()"]
+Input: asteroids = [8,-8]
+Output: []
+Explanation: The 8 and -8 collide exploding each other.
+Example 3:
 
+Input: asteroids = [10,2,-5]
+Output: [10]
+Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulting in 10.
 
-Constraints:
-
-1 <= n <= 8
 '''
 
 
 class Solution:
-    def generateParenthesis(self, n: int) -> list[str]:
-        opening_brackets = '('*n
-        closing_brackets = ')'*n
+    def asteroidCollision(self, asteroids: list[int]) -> list[int]:
+        stack = [asteroids[0]]
+        for i in range(1, len(asteroids)):
+            stack.append(asteroids[i])
 
-        
+            while len(stack)>1 and (stack[-2] > 0 and stack[-1] < 0):
+                if abs(stack[-2]) == abs(stack[-1]):
+                    stack.pop(-2)
+                    stack.pop(-1)
+
+                elif abs(stack[-2]) < abs(stack[-1]):
+                    stack.pop(-2)
+
+                else:
+                    stack.pop(-1)
+
+        return stack
+
+
+print(Solution().asteroidCollision([8,-8]))

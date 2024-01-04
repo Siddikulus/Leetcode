@@ -31,21 +31,7 @@ s consists of English letters, digits, symbols and spaces.
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        j = 0
-        count = 0
-        unique_s = ''
-        maxcount = 0
-        while j < len(s):
-            if s[j] not in unique_s:
-                count += 1
-                maxcount = max(maxcount, count)
-            else:
-                unique_s = ''
-                count = 1
-            print(s, unique_s, j, s[j], count)
-            unique_s += s[j]
-            j += 1
-        return maxcount
+        pass
 
-print(Solution().lengthOfLongestSubstring("dvdf"))
+print(Solution().lengthOfLongestSubstring("abcabcbb"))
 
