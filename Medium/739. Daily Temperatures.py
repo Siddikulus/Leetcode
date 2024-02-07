@@ -37,5 +37,5 @@ class Solution:
 
         return ans
 
-
+#Full Referenced
 print(Solution().dailyTemperatures([73,74,75,71,69,72,76,73]))

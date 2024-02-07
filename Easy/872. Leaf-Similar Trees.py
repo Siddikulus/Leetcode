@@ -28,6 +28,7 @@ Constraints:
 The number of nodes in each tree will be in the range [1, 200].
 Both of the given trees will have values in the range [0, 200].
 '''
+from DSinitialization.data_structure_initialization import BinaryTree
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -35,22 +36,30 @@ Both of the given trees will have values in the range [0, 200].
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
-    def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        def collect_leaf_values(root, leaf_values):
-            if not root:
-                return
-            if not root.left and not root.right:
-                leaf_values.append(root.val)
-            collect_leaf_values(root.left, leaf_values)
-            collect_leaf_values(root.right, leaf_values)
+class Solution(object):
+    def leafSimilar(self, root1, root2):
+        """
+        :type root1: TreeNode
+        :type root2: TreeNode
+        :rtype: bool
+        """
+        ans1 = []
+        ans2 = []
+        self.helper(root1, ans1)
+        self.helper(root2, ans2)
+        return ans1 == ans2
+    def helper(self,root, arr):
+        if not root.left and not root.right:
+            arr.append(root.val)
+        if root.left:
+            self.helper(root.left, arr)
+        if root.right:
+            self.helper(root.right, arr)
+        return arr
 
-        leaf_values1 = []
-        leaf_values2 = []
 
-        collect_leaf_values(root1, leaf_values1)
-        collect_leaf_values(root2, leaf_values2)
+root1 = BinaryTree().deserialize('[3,5,1,6,2,9,8,null,null,7,4]')
+root2 = BinaryTree().deserialize('[3,5,1,6,7,4,2,null,null,null,null,null,null,9,8]')
 
-        return leaf_values1 == leaf_values2
-
-#Full referenced - Trees
+# BinaryTree().drawtree(root)
+print(Solution().leafSimilar(root1, root2))

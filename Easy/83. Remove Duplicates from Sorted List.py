@@ -22,6 +22,7 @@ The number of nodes in the list is in the range [0, 300].
 The list is guaranteed to be sorted in ascending order.
 '''
 
+from DSinitialization.data_structure_initialization import Linkedlist
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -29,12 +30,27 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        current = head
-        while current and current.next:
-            if current.val == current.next.val:
-                current.next = current.next.next
-            else:
-                current = current.next
+    def deleteDuplicates(self, head):
+        dummynodecurr = ListNode()
+        dummynodeprev = ListNode()
+        dummynodeprev.next = dummynodecurr
+        dummynodecurr.next = head
 
-        return head
+        curr = dummynodecurr
+        prev = dummynodeprev
+        while curr:
+            if prev.val == curr.val:
+                prev.next = curr.next
+                curr = curr.next
+            else:
+                prev = curr
+                curr = curr.next
+        return dummynodeprev.next
+
+
+listhead = Linkedlist().append([0,0,0,0,0])
+head = Solution().deleteDuplicates(listhead)
+
+while head:
+    print(head.val)
+    head = head.next

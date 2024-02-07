@@ -36,6 +36,12 @@ words[i] consist of lowercase English letters.
 All the strings are of the same length.
 '''
 
-
+from collections import defaultdict
 class Solution:
     def numSpecialEquivGroups(self, words: list[str]) -> int:
+        ans = set()
+        for word in words:
+            ans.add(''.join(sorted(word[::2]) + sorted(word[1::2])))
+        return len(ans)
+
+print(Solution().numSpecialEquivGroups(words = ["abc","acb","bac","bca","cab","cba"]))
