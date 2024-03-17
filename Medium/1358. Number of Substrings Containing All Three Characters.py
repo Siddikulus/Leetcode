@@ -30,38 +30,19 @@ s only consists of a, b or c characters.
 
 class Solution:
     def numberOfSubstrings(self, s: str) -> int:
+        left = 0
+        right = 0
+        total = 0
+        count = {'a':0, 'b':0, 'c':0}
+        while right < len(s):
+            count[s[right]] = 1 + count[s[right]]
+            while count['a'] and count['b'] and count['c']:
+                total += len(s) - right
+                count[s[left]] = count[s[left]] - 1
+                left+=1
+            right+=1
+        return total
 
-        #Correct but time complexity can be reduced by taking count of all remaining substrings once we hit abc
 
-        # i = 0
-        # j = 0
-        # count = 0
-        # temp = ''
-        # while i<len(s):
-        #     if j<len(s):
-        #         temp += s[j]
-        #         if 'a' in temp and 'b' in temp and 'c' in temp:
-        #             count += 1
-        #         j+=1
-        #     else:
-        #         i+=1
-        #         temp = ''
-        #         j=i
-        #     # print(i,j,temp, count)
-        # return count
-
-        i = 0
-        j = 0
-        count = 0
-        countDict = {'a':0, 'b':0, 'c':0}
-        while i<len(s) and j<len(s):
-            countDict[s[j]] = 1 + countDict.get(s[j], 0)
-            while (countDict['a'] and countDict['b'] and countDict['c']):
-                count += len(s)-j
-                countDict[s[i]] -= 1
-                i+=1
-            j+=1
-        return count
-
-print(Solution().numberOfSubstrings('aaacb'))
+print(Solution().numberOfSubstrings(s = "abcabc"))
 

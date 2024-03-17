@@ -33,17 +33,20 @@ s consists of lowercase English letters.
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
         left = 0
-        maxcount = 0
+        right = 0
+        maxval = float("-inf")
         vowels = 'aeiou'
         count = 0
-        for right in range(len(s)):
+        while right < len(s):
             if s[right] in vowels:
                 count+=1
-            if right-left+1 > k:
+            while right-left+1 == k:
+                maxval = max(maxval, count)
                 if s[left] in vowels:
                     count -= 1
                 left+=1
-            maxcount = max(maxcount,count)
-        return maxcount
+            right+=1
+        return maxval
 
-print(Solution().maxVowels('leetcode', 3))
+
+print(Solution().maxVowels(s = "leetcode", k = 3))

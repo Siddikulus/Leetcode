@@ -28,6 +28,11 @@ Constraints:
 
 Follow up: Could you solve it without loops/recursion?
 '''
-
+import math
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
+        logval = math.log2(n)
+        return logval.is_integer()
+
+print(Solution().isPowerOfTwo(15))
+

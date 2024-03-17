@@ -41,23 +41,19 @@ answerKey[i] is either 'T' or 'F'
 
 class Solution:
     def maxConsecutiveAnswers(self, answerKey: str, k: int) -> int:
-         i = 0
-         j = 0
-         tcount, fcount = 0, 0
-         minlength = 0
-         while i<len(answerKey) and j<len(answerKey):
-             if answerKey[j] == 'T':
-                 tcount += 1
-             else:
-                 fcount += 1
-             j+=1
-             while (tcount > k and fcount > k):
-                 if answerKey[i] == 'T':
-                     tcount-=1
-                 else:
-                     fcount-=1
-                 i += 1
-             minlength = max(minlength, j - i)
-         return minlength
+        count = {'T': 0, 'F': 0}
+        left = 0
+        maxlen = 0
+        right = 0
+        while right < len(answerKey):
+            count[answerKey[right]] = 1 + count[answerKey[right]]
 
-print(Solution().maxConsecutiveAnswers('FFFTTFTTFT', 3))
+            while count['T'] > k and count['F'] > k:
+                count[answerKey[left]] = count[answerKey[left]] - 1
+                left += 1
+
+            maxlen = max(maxlen, right - left+1)
+            right += 1
+        return maxlen
+
+print(Solution().maxConsecutiveAnswers(answerKey = "TTFTTFTT", k = 1))

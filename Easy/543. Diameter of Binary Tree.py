@@ -33,23 +33,23 @@ from DSinitialization.data_structure_initialization import BinaryTree
 #         self.left = left
 #         self.right = right
 class Solution(object):
+    def __init__(self):
+        self.maxwidth = 0
     def diameterOfBinaryTree(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        ans = [0]
-        def helper(root):
-            if root is None: return 0
-            # print(root.val)
-            left = helper(root.left)
-            right = helper(root.right)
-            ans[0] = max(ans[0], left+right)
-            return  1 + max(left, right)
+        self.height(root)
+        return self.maxwidth
 
-        helper(root)
-        return ans[0]
+    def height(self, root):
+        if not root: return 0
+        left = self.height(root.left)
+        right = self.height(root.right)
+        self.maxwidth = max(self.maxwidth, left+right)
+        return 1 + max(left, right)
 
-root = BinaryTree().deserialize('[1,2]')
+root = BinaryTree().deserialize('[4,-7,-3,null,null,-9,-3,9,-7,-4,null,6,null,-6,-6,null,null,0,6,5,null,9,null,null,-1,-4,null,null,null,-2]')
 # BinaryTree().drawtree(root)
 print(Solution().diameterOfBinaryTree(root))

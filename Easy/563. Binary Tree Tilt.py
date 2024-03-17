@@ -55,10 +55,12 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        pass
+        
+
+
+
 
 
 root = BinaryTree().deserialize('[1,2,7,3,4,8,9,5,6,null,null,10,null,11,12]')
-# BinaryTree().drawtree(root)
+BinaryTree().drawtree(root)
 print(Solution().findTilt(root))
-BinaryTree().drawtree(Solution().findTilt(root))

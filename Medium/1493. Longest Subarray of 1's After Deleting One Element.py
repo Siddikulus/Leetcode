@@ -31,18 +31,24 @@ nums[i] is either 0 or 1.
 
 class Solution:
     def longestSubarray(self, nums: list[int]) -> int:
-        i,j,max_length = 0,0,0
-        element_count = {0:0, 1:0}
+        left = 0
+        right = 0
+        zeroes = 0
+        final = 0
 
-        while i < len(nums) and j<len(nums):
-            element_count[nums[j]] = 1 + element_count.get(nums[j], 0)
-            # print(nums, i, j, element_count, max_length)
-            if element_count[0] > 1:
-                element_count[nums[i]] -= 1
-                i+=1
-            max_length = max(max_length, j-i)
-            j+=1
+        while right < len(nums):
+            if nums[right] == 0:
+                zeroes += 1
 
-        return max_length
+            while zeroes > 1:
+                if nums[left] == 0:
+                    zeroes -= 1
+                left += 1
 
-print(Solution().longestSubarray([1,1,1]))
+            final = max(final, right - left)
+            right += 1
+        return final
+
+
+
+print(Solution().longestSubarray(nums = [0,1,1,1,0,1,1,0,1]))

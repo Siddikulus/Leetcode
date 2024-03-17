@@ -31,21 +31,23 @@ Constraints:
 
 class Solution:
     def countCompleteSubarrays(self, nums: list[int]) -> int:
+        distinct = len(set(nums))
         left = 0
-        total_dist = len(set(nums))
+        right = 0
         freq = {}
-        count = 0
-        for right in range(len(nums)):
+        maxlen = 0
+        while right < len(nums):
             freq[nums[right]] = 1 + freq.get(nums[right], 0)
-            while len(freq) == total_dist:
-                count += len(nums) - right
-                freq[nums[left]] -= 1
+
+            while len(freq) == distinct:
+                maxlen += len(nums) - right
+                freq[nums[left]] = freq[nums[left]] - 1
                 if freq[nums[left]] == 0:
                     del freq[nums[left]]
                 left+=1
-                # print(nums, left, right, freq, count)
-            # print(nums, left, right, freq, count)
-        return count
+            right+=1
+        return maxlen
+
 
 print(Solution().countCompleteSubarrays([1,3,1,2,2]))
 

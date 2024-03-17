@@ -25,18 +25,15 @@ Constraints:
 
 class Solution:
     def subarraySum(self, nums: list[int], k: int) -> int:
-        count = 0
-        for index in range(len(nums)):
-            total = 0
-            curr = index
-            while curr < len(nums):
-                print(index, curr, total, count)
-                if total != k:
-                    total += nums[curr]
-                elif total == k:
-                    count += 1
-                    break
-                curr += 1
-        return count
+        counter = {0:1}
+        prefix_sum = 0
+        final = 0
+        for i in range(len(nums)):
+            prefix_sum += nums[i]
+            diff = prefix_sum-k
+            if diff in counter:
+                final += counter[diff]
+            counter[prefix_sum] = 1 + counter.get(prefix_sum, 0)
+        return final
 
-print(Solution().subarraySum([1,2,3], 2))
+print(Solution().subarraySum([1,2,3], 3))

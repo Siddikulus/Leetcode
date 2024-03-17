@@ -37,25 +37,19 @@ All the integers of nums1 also appear in nums2.
 
 class Solution:
     def nextGreaterElement(self, nums1: list[int], nums2: list[int]) -> list[int]:
-        greater = []
-        for element in nums1:
-            index_nums2 = nums2.index(element)
-            if index_nums2 == len(nums2)-1:
-                greater.append(-1)
-            else:
-                remaining_nums = nums2[index_nums2+1:][:]
-                for elementindex in range(len(remaining_nums)):
-                    maxnum = None
-                    if remaining_nums[elementindex] > element:
-                        maxnum = remaining_nums[elementindex]
-                        break
-                    else:
-                        maxnum = -1
-                    greater.append(maxnum)
-                # print(element, remaining_nums, greater)
-
-        return greater
+        arr = [0]*len(nums1)
+        for oneindex in range(len(nums1)):
+            index = nums2.index(nums1[oneindex])
+            if index == len(nums2)-1:
+                arr[oneindex] = -1
+            for i in range(index+1, len(nums2)):
+                if nums2[i] > nums2[index]:
+                    arr[oneindex] = nums2[i]
+                    break
+                else:
+                    arr[oneindex] = -1
+        return arr
 
 
 s = Solution()
-print(s.nextGreaterElement([1,3,5,2,4], [6,5,4,3,2,1,7]))
+print(s.nextGreaterElement(nums1 = [4,1,2], nums2 = [1,3,4,2]))

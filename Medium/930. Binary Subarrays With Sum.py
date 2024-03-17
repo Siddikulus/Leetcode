@@ -29,6 +29,17 @@ nums[i] is either 0 or 1.
 
 class Solution:
     def numSubarraysWithSum(self, nums: list[int], goal: int) -> int:
-        pass
+        prefix = 0
+        count = 0
+        dict = {0:1}
+
+        for i in range(len(nums)):
+            prefix += nums[i]
+            diff = prefix - goal
+            if diff in dict:
+                count+=dict[diff]
+            dict[prefix] = 1 + dict.get(prefix, 0)
+        return count
+
 
 print(Solution().numSubarraysWithSum([0,0,0,0,0], 0))

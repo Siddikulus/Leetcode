@@ -25,20 +25,7 @@ Constraints:
 
 class Solution:
     def longestConsecutive(self, nums: list[int]) -> int:
-        count = 1
-        i = 0
-        val = nums[0]
-        countlist = []
-        while i<len(nums):
-            print(i, nums[i], val, count, countlist)
-            if val + 1 in nums:
-                count+=1
-                val += 1
-            else:
-                count = 1
-                val = nums[i]
-                i+=1
-            countlist.append(count)
-        return max(countlist)+1
+        pass
 
-print(Solution().longestConsecutive([100,4,200,1,3,2]))
+
+print(Solution().longestConsecutive(nums = [0,3,7,2,5,8,4,6,0,1]))

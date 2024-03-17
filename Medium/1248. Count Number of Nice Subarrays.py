@@ -28,30 +28,36 @@ Constraints:
 1 <= k <= nums.length
 '''
 
+
+'''
+# Just keep count of the current odd number.
+# Look in the dictionary if we can find (currendOds - k), 
+# if it exisits that means I can get an subarray with k odds.
+# Also keep count of number of different types of odds too,
+# because for K =1 , [2,2,1] is a valid list, so does, [2,1] and [1].
+
+
+https://www.youtube.com/watch?v=xvNwoz-ufXA
+'''
 class Solution:
     def numberOfSubarrays(self, nums: list[int], k: int) -> int:
+        temp = nums.copy()
+        for i in range(len(nums)):
+            if nums[i]%2 == 0:
+                temp[i] = 0
+            else:
+                temp[i] = 1
 
-        #Wrong, could not understand question
-        # countParity = {'odd':0, 'even': 0}
-        # i = 0
-        # j = 0
-        # count = 0
-        # while i<len(nums) and j<len(nums):
-        #     if nums[j]%2 == 0:
-        #         countParity['even'] += 1
-        #     else:
-        #         countParity['odd'] += 1
-        #
-        #     while countParity['odd'] == k:
-        #         print(nums[i:j+1], i, j, count)
-        #         count+=1
-        #         if nums[i] % 2 == 0:
-        #             countParity['even'] -= 1
-        #         else:
-        #             countParity['odd'] -= 1
-        #     j+=1
-        #     # print(nums[i:j + 1], i, j, count)
-        # return count
-        pass
+        counter = {0:1}
+        prefix_sum = 0
+        final = 0
+        for i in range(len(temp)):
+            prefix_sum += temp[i]
+            diff = prefix_sum-k
+            if diff in counter:
+                final += counter[diff]
+            counter[prefix_sum] = 1 + counter.get(prefix_sum, 0)
+        return final
 
-print(Solution().numberOfSubarrays([2,2,2,1,2,2,1,2,2,2], 2))
+
+print(Solution().numberOfSubarrays(nums = [1,1,2,1,1], k = 3))
